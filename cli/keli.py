@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Keli CLI — Parrot-style terminal with nanobot ocean theme."""
-import sys, os, json, argparse, shutil, threading, time, readline, re
+import sys, os, json, argparse, shutil, threading, time, readline, re, random, math
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -42,15 +42,28 @@ def api_post(endpoint, data):
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+import math as _math
+
+def nanobot_swarm_art(count=8):
+    bots = []; chars = ['◆','◇','•','○','◈','✦','⬡']
+    for i in range(count):
+        c = '\033[9' + str((i % 6) + 2) + 'm'
+        bots.append(f'{c}{random.choice(chars)}\033[0m')
+    return ' '.join(bots)
+
 def print_header(mode='plan', awake_bots=8742, total_bots=10000):
     tw = term_width()
     cap_pct = int(awake_bots / total_bots * 100) if total_bots else 0
-    sys.stdout.write(f'{C}┌─[{B}{mode.upper()}{C}]─[{awake_bots:.0f}/{total_bots} bots]─[{cap_pct}% cap]─{"─" * (tw - 40)}\n')
+    helix = '\033[96m╱╲\033[0m' if _math.sin(time.time()) > 0 else '\033[94m╲╱\033[0m'
+    swarm = nanobot_swarm_art(6)
+    sys.stdout.write(f'{C}┌─{helix}─[{B}{mode.upper()}{C}]─[{awake_bots:.0f}/{total_bots} bots]─[{cap_pct}% cap]─{swarm}─{"─" * max(0, tw - 70)}\n')
     sys.stdout.write(f'{RESET}')
     sys.stdout.flush()
 
 def print_prompt(mode='plan'):
-    sys.stdout.write(f'{C}keli@sovereign:{mode}${RESET} ')
+    bot = random.choice(['◆','◇','•','○','◈'])
+    color = random.choice(['\033[96m','\033[92m','\033[95m','\033[94m'])
+    sys.stdout.write(f'{color}{bot}\033[0m \033[96mkeli@fsi:{mode}\033[92m$\033[0m ')
     sys.stdout.flush()
 
 def print_keli_header(text):
@@ -209,8 +222,31 @@ def interactive_plan(renderer):
         else:
             print_keli_header(f'{R}Swarm offline. Start the API first.{RESET}')
 
+def show_nanobots_building(duration=2.0):
+    frames = [
+        '\033[96m◇\033[0m \033[90m···\033[0m \033[92m◆\033[0m \033[90m···\033[0m \033[95m⬡\033[0m',
+        '\033[90m·\033[0m \033[96m◇\033[0m \033[90m·\033[0m \033[92m◆\033[0m \033[90m·\033[0m \033[95m⬡\033[0m \033[90m·\033[0m',
+        '\033[90m··\033[0m \033[96m◇\033[0m \033[90m·\033[0m \033[92m◆\033[0m \033[95m⬡\033[0m \033[90m··\033[0m',
+        '\033[90m···\033[0m \033[96m◇\033[0m \033[92m◆\033[0m \033[95m⬡\033[0m \033[90m···\033[0m',
+        '\033[90m·\033[0m \033[95m⬡\033[0m \033[90m·\033[0m \033[96m◇\033[0m \033[90m·\033[0m \033[92m◆\033[0m \033[90m·\033[0m',
+        '\033[95m⬡\033[0m \033[90m···\033[0m \033[96m◇\033[0m \033[90m···\033[0m \033[92m◆\033[0m',
+    ]
+    end = time.time() + duration
+    i = 0
+    while time.time() < end:
+        dna = '\033[96m╱╲\033[0m' if i % 2 == 0 else '\033[94m╲╱\033[0m'
+        bits = ''.join(random.choice('01') for _ in range(6))
+        wave = ''.join(random.choice(['~','≈','·','○']) for _ in range(4))
+        line = f'\033[1;92m◇ BUILDING ◇\033[0m  {dna}  {frames[i % len(frames)]}  {bits}  {wave}'
+        sys.stdout.write(f'\r{line:{shutil.get_terminal_size((80,20)).columns}}')
+        sys.stdout.flush()
+        time.sleep(0.12)
+        i += 1
+    sys.stdout.write('\r' + ' ' * shutil.get_terminal_size((80,20)).columns + '\r')
+    sys.stdout.flush()
+
 def interactive_build(renderer, monitor):
-    print(f'{C}Build Mode — Describe what to build.{RESET}\n')
+    print(f'{C}◇ BUILD Mode — Nanobots ready to construct.{RESET}\n')
     while True:
         print_prompt('build')
         try:
@@ -221,13 +257,12 @@ def interactive_build(renderer, monitor):
         if line == '/exit' or line == 'exit': break
         if line == 'clear': clear_screen(); continue
 
-        sys.stdout.write(f'{Y}[BUILD]{RESET} Analyzing...\n')
-        sys.stdout.write(f'{Y}[BUILD]{RESET} Coordinators voting...\n')
-        t = threading.Thread(target=monitor.simulate_build, args=(2.0,), daemon=True)
+        sys.stdout.write(f'\033[96m◇\033[0m \033[92m10,000 nanobots deploying...\033[0m\n')
+        t = threading.Thread(target=show_nanobots_building, args=(1.5,), daemon=True)
         t.start()
+        sys.stdout.write(f'\033[95m⬡\033[0m Coordinators routing tasks...\n')
         t.join()
-
-        sys.stdout.write(f'{Y}[BUILD]{RESET} Assembling files...\n')
+        sys.stdout.write(f'\033[96m◆\033[0m Assembling files from swarm memory...\n')
         result = api_post('build', {'prompt': line})
         if result and 'response' in result:
             files = result.get('files', {})

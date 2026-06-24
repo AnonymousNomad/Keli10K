@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNCA Keli — Underwater IDE</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/theme/dracula.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="canvas-layer">
+  <canvas id="water-canvas"></canvas>
+  <canvas id="underwater-canvas"></canvas>
+  <canvas id="fish-canvas"></canvas>
+</div>
+
+<div id="app">
+  <div id="sidebar">
+    <div id="sidebar-header">
+      <span class="logo">~</span>
+      <span>SNCA</span>
+      <button id="new-file-btn" title="New file">+</button>
+    </div>
+    <div id="file-tree"></div>
+  </div>
+
+  <div id="main">
+    <div id="editor-header">
+      <span id="filename-display">untitled</span>
+      <div id="editor-actions">
+        <button id="save-btn" title="Save (Ctrl+S)">Save</button>
+        <button id="run-btn" title="Run preview (Ctrl+Enter)">Run</button>
+        <button id="build-btn" title="Build with Keli">Build</button>
+        <button id="ship-btn" title="Ship It">Ship It</button>
+        <button id="mode-toggle" title="Toggle Keli mode">Plan</button>
+      </div>
+    </div>
+    <div id="editor-container">
+      <textarea id="editor"></textarea>
+    </div>
+    <div id="terminal">
+      <div id="terminal-header">
+        <span>terminal</span>
+        <button id="terminal-clear">clear</button>
+      </div>
+      <div id="terminal-output"></div>
+    </div>
+    <div id="build-output" class="hidden">
+      <div id="build-header">
+        <span>Build Output</span>
+        <button id="build-close">close</button>
+      </div>
+      <iframe id="build-frame" sandbox="allow-scripts allow-modals"></iframe>
+    </div>
+  </div>
+
+  <div id="chat-panel">
+    <div id="chat-header">
+      <span class="chat-avatar">K</span>
+      <span>Keli</span>
+      <span id="chat-status">online</span>
+      <a href="https://ko-fi.com/ferrellsi" target="_blank" id="donate-btn" title="Support Keli">☕</a>
+    </div>
+    <div id="chat-messages">
+      <div class="msg keli">
+        <div class="msg-bubble">Hey dumbass. What are we building today?</div>
+      </div>
+    </div>
+    <div id="chat-input-area">
+      <textarea id="chat-input" placeholder="Ask Keli to build something..." rows="2"></textarea>
+      <button id="chat-send">Send</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="js/api_bridge.js"></script>
+<script src="js/audio_engine.js"></script>
+<script src="js/blueprint.js"></script>
+<script src="js/tutor_mode.js"></script>
+<script src="js/certificate.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "domains": [
+    "python",
+    "react",
+    "css",
+    "javascript"
+  ],
+  "total_docs": 20,
+  "embed_dim": 128,
+  "version": "1.0.0"
+}

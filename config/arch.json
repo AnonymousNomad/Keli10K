@@ -1,0 +1,74 @@
+{
+  "name": "SNCA",
+  "version": "1.0.0",
+  "layers": {
+    "l5_ego": {
+      "identity": {
+        "name": "Keli",
+        "principle": "I do not store facts. I retrieve them. I cite them. I doubt myself.",
+        "constraints": ["No hallucination", "No unsourced claims", "No external APIs beyond whitelist"]
+      },
+      "personality": {
+        "dim": 16,
+        "mlp_layers": 4,
+        "mlp_hidden": 32,
+        "params": 4096
+      }
+    },
+    "l4_governor": {
+      "kernel": {"timeout_ms": 5000, "max_retries": 2},
+      "daemon": {"log_level": "INFO", "monitor_interval_s": 1},
+      "truth_engine": {"scan_regex": "\\[([A-Za-z0-9._/-]+)\\]"}
+    },
+    "l3_orchestrator": {
+      "d_model": 384,
+      "n_layers": 10,
+      "n_heads": 6,
+      "vocab_size": 8192,
+      "max_seq_len": 4096,
+      "ffn_mult": 2,
+      "sparse_window": 128,
+      "dropout": 0.0
+    },
+    "l2_nanobot": {
+      "max_bots": 64,
+      "max_params_per_bot": 10000,
+      "embed_dim": 128,
+      "cache_size_mb": 64,
+      "default_timeout_s": 5,
+      "pre_seed_domains": ["developer.mozilla.org", "react.dev", "docs.python.org", "arxiv.org", "github.com"]
+    },
+    "l1_memory": {
+      "hippocampus": {
+        "dim": 128,
+        "max_episodes": 10000,
+        "decay_rate": 0.95,
+        "decay_unit_hours": 24
+      },
+      "resonance": {
+        "query_dim": 128,
+        "n_bots": 64,
+        "learning_rate": 0.01
+      },
+      "dream": {
+        "batch_size": 100,
+        "trigger_idle_min": 300,
+        "compression_ratio": 0.3
+      }
+    }
+  },
+  "whitelist": {
+    "domains": ["developer.mozilla.org", "react.dev", "docs.python.org", "arxiv.org", "github.com"],
+    "github_only": ["discussions", "issues"],
+    "blocked_patterns": ["raw.githubusercontent.com", "api.github.com/repos/*/contents"]
+  },
+  "training": {
+    "phases": [
+      {"name": "P1_reasoning", "samples": 2000000, "format": "Q_Chain_A"},
+      {"name": "P2_decomposition", "samples": 500000, "format": "Task_SubList"},
+      {"name": "P3_orchestration", "samples": 500000, "format": "Sub_DispatchJSON"},
+      {"name": "P4_synthesis", "samples": 500000, "format": "Snippets_CitedAnswer"},
+      {"name": "P5_self_correction", "samples": 200000, "format": "Draft_Fixed"}
+    ]
+  }
+}

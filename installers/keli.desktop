@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Keli
+Comment=Keli AI Assistant - Desktop Interface
+Exec=keli-desktop start
+Icon=keli
+Terminal=false
+Categories=Utility;Development;AI;
+StartupNotify=true
+StartupWMClass=Keli
+MimeType=text/plain;

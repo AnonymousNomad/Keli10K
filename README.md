@@ -1,104 +1,51 @@
-# ◢◣ Keli10K — Sovereign Nanobot Swarm Intelligence
+# ═══════════════════════════════════════════════════════════════
+# ◢◣ Keli10K → FSI_FELON — MERGED
+# ═══════════════════════════════════════════════════════════════
 
-**25.1M parameters · 10,000 nanobots · 5 territories · CPU-native**
-
-Keli is a language model built on a **nanobot swarm architecture**. Instead of monolithic feed-forward layers, 10,000 individually differentiable nanobots coordinate through territorial coordinators to solve coding tasks. Runs entirely on CPU. No GPU required.
-
-## Quick Start
-
-```bash
-pip install torch
-
-# Start the API + IDE server
-python api_server.py
-
-# Or launch the terminal CLI
-python cli/keli.py
-
-# Or do both
-python launch.py --mode all
-```
-
-Open **http://localhost:8085** for the web IDE.
-
-## Terminal Modes
-
-| Mode | Command | What it does |
-|------|---------|-------------|
-| **Plan** | `[1]` | Coding Q&A with confidence-scored responses |
-| **Build** | `[2]` | Multi-file project generation with territory visualization |
-| **Tutor** | `[3]` | Interactive step-by-step coding lessons with certificates |
-| **Train** | `[4]` | Keli as teacher — generate training data, score outputs, supervise other models |
-
-## Architecture
-
-```
-                    ┌──────────────────────┐
-                    │  10 Coordinator Bots  │
-                    │  (task classification)│
-                    └──────────┬───────────┘
-                               │
-                    ┌──────────▼───────────┐
-                    │     TaskRouter        │
-                    │  (routes 10K swarm)   │
-                    └──────────┬───────────┘
-                               │
-         ┌─────────────────────┼─────────────────────┐
-         │                     │                     │
-    ┌────▼────┐          ┌────▼────┐          ┌────▼────┐
-    │ HTML    │          │  CSS    │          │  JS     │
-    │ Territory│         │Territory│         │Territory│
-    └─────────┘          └─────────┘          └─────────┘
-    ┌────▼────┐          ┌────▼────┐
-    │ Python  │          │  DB     │
-    │Territory│         │Territory│
-    └─────────┘          └─────────┘
-```
-
-## Training
-
-Keli10K trains on **1.5M gold-standard cognitive examples** across 15 domains. The training loop streams from disk with manual batching, checkpointing every 100 steps. Current checkpoint: ~261MB.
-
-## Train Your Own Models
-
-Keli's **Train mode** lets you use the 10K nanobot swarm as a teacher:
-1. Load your student model (PyTorch)
-2. Keli generates high-quality training examples
-3. Keli scores outputs and provides feedback
-4. Run distillation epochs with progress tracking
-
-## Web IDE
-
-The underwater-themed IDE features:
-- Code editor with syntax highlighting (CodeMirror)
-- File tree with persistent storage (IndexedDB)
-- AI chat panel
-- Blueprint swarm visualization
-- Ambient audio engine
-- Build/preview/export system
-
-## Comparison
-
-- **vs Claude Fable 5**: Keli is 1000× smaller, runs on CPU, fully open source, has confidence-gated responses, and includes a native training mode
-- **vs OpenAI Codex**: Keli provides transparent confidence scoring, swarm visualization, and offline capability
-- **vs Gemini Antigravity**: Keli's nanobot architecture provides transparent multi-agent coordination with territorial specialization
-
-## Support Keli
-
-Keli is and always will be **free and open source** (MIT). If you want to support development:
-
-| Method | Link |
-|--------|------|
-| ☕ Buy me a coffee | [ko-fi.com/ferrellsi](https://ko-fi.com/ferrellsi) |
-| 💖 GitHub Sponsors | [github.com/sponsors/AnonymousNomad](https://github.com/sponsors/AnonymousNomad) |
-| ₿ Bitcoin | `bc1q...` (coming soon) |
-
-Every coffee keeps the nanobots swimming. No pressure — the code is free regardless.
-
-## License
-
-MIT — Free for all use. No restrictions. No telemetry. No nonsense.
+> **ATTENTION:** Keli10K has fully merged into **FSI_FELON v4.0** (Ferrell Synthetic Intelligence).
+> This repository remains public for **experimental purposes, documentation reference, and community forking**.
+> All active development continues at [github.com/AnonymousNomad/FSI_FELON](https://github.com/AnonymousNomad/FSI_FELON).
 
 ---
 
-*Built with PyTorch · 10,000 nanobots can't be wrong · [Support the swarm](https://ko-fi.com/ferrellsi)*
+## What Was Keli10K?
+
+Keli10K was a nanobot swarm intelligence model — 25M parameters, 10,000 nanobots, 5 territories, CPU-native. A sovereign language model built without GPU dependency.
+
+## What Happened?
+
+Keli10K's architecture, training, and nanobot routing system have been **absorbed into FSI_FELON** — a unified self-architecting code intelligence system with:
+
+- **Q-NFRE Engine** — Quantum-Neural Fractal Recursive Engine (10K nanobot swarm, 98% accuracy)
+- **CogNGram** — Multi-layer cognitive n-gram generator (109M n-grams, 100K training texts)
+- **Deep Transformer Core** — 95M parameter nanobot-routed transformer (training toward 50K+ steps)
+- **Synthetic Soul Engine** — Visible stream of consciousness accompanying every response
+- **Lie Detector** — Confidence annotation on every generated output
+- **Temporal Sharding** — Word (fast/now) vs Char (deep/right) voting mechanism
+- **DreamBowl** — Hyperbolic Poincaré embedding memory
+- **Necropolis** — Dead code resurrection via crossover breeding
+- **Dreamscape** — Idle consciousness visualization mode
+- **45/45 enterprise tests passing · 100% compile rate · 93% autoloop success**
+
+## For Community
+
+This repo is **left open** for:
+- **Experimental research** — Fork it, modify it, push your own nanobot architectures
+- **Documentation** — Reference architecture for nanobot swarm routing
+- **Educational use** — Learn how sovereign CPU-native AI models are built
+- **Derivative projects** — Take Keli's ideas and run with them
+
+**All pull requests, issues, and forks welcome.** This code is MIT licensed.
+
+## Quick Links
+
+- **FSI_FELON (active repo):** [github.com/AnonymousNomad/FSI_FELON](https://github.com/AnonymousNomad/FSI_FELON)
+- **HF Spaces:** [huggingface.co/FerrellSyntheticIntelligence/FSI_FELON](https://huggingface.co/spaces/FerrellSyntheticIntelligence/FSI_FELON)
+- **Sponsors:** [github.com/sponsors/AnonymousNomad](https://github.com/sponsors/AnonymousNomad)
+
+---
+
+<div align="center">
+<i>Keli10K is not dead. It became something larger.</i><br>
+<b>MIT License — Free forever.</b>
+</div>
